@@ -43,7 +43,7 @@ def register_tooltip_modals(app: dash.Dash) -> None:
     # but we will open the same modal for both so we strip out the
     # c1 or c2 identifier when referencing the modal
     # channel identifier in the id (if it exists).
-    cmatch = re.compile("_c\d+_")
+    cmatch = re.compile(r"_c\d+_")
 
     for name in channel_tooltips:
         if (

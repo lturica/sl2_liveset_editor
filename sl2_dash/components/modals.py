@@ -25,7 +25,7 @@ choose_default_tsl_modal = register_modal(
                     id=Nav.DEFAULT_DROPDOWN,
                     options=[],   # populated at open time
                     value=None,
-                    style={"width": "100%"},
+                    style={"width": "100%", "fontSize": "0.95rem", "lineHeight": "1.2"},
                 ),
                 html.Div( style={"marginTop": "0.5rem", "fontSize": "0.9rem"}),
             ]
@@ -47,7 +47,8 @@ delete_patch_modal= register_modal(
             dbc.ModalHeader(dbc.ModalTitle("Delete current patch")),
             dbc.ModalBody([
                     dbc.Label("Are you sure you want to delete the current patch?"),
-                    html.Div( style={"marginTop": "0.5rem", "fontSize": "0.9rem"}),
+                    dbc.Label("Note: You cannot delete the last remaining patch in the live set."),
+                    html.Div(style={"marginTop": "0.5rem", "fontSize": "0.9rem"}),
                 ]
             ),
             dbc.ModalFooter([
@@ -78,7 +79,10 @@ instructions_modal = register_modal(
                 "more can be found in the About section in the navigation bar."),
             html.P("You can always open these instructions by clicking the instructions button at the top of this page."),
         ]),
-    ], is_open=True, id = 'instructions_modal')
+    ], 
+    is_open=True, 
+    centered=True,
+    id = 'instructions_modal')
 )
 
 # Disclaimer modal shows up when the site is opened for the first time, to explain the tool and current limitations.
@@ -131,7 +135,10 @@ disclaimer_modal = register_modal(
                     ".",],
                     style={"font-size":"x-small","align":"left"})
         )
-    ], is_open=False, id = 'info_modal')
+    ], 
+    is_open=False, 
+    centered=True,
+    id = 'info_modal')
 )
 
 
@@ -150,7 +157,9 @@ live_set_modal = register_modal(
                 " file you are importing, so this field will be overwritten when importing into Tone Studio if the filename is different.")
             ]
         )
-    ], id="ls_name_tt_modal")
+    ], 
+    centered=True,
+    id="ls_name_tt_modal")
 )
 
 # Patch name modal
@@ -164,7 +173,9 @@ patch_name_modal = register_modal(
             html.B("Note:"),
             html.P(" The PATCH%COM array (and, therefore, the Patch Name value) is limited to 16 characters.")
         ])
-    ], id="patch_name_tt_modal")
+    ], 
+    centered=True,
+    id="patch_name_tt_modal")
 )
 
 # Patch name modal
@@ -190,7 +201,9 @@ format_rev_modal = register_modal(
             html.B("Note:"),
             html.P("For now this value is only allowed to be '0001' until the scope of this value is confirmed.")
         ])
-    ], id="format_rev_tt_modal")
+    ], 
+    centered=True,
+    id="format_rev_tt_modal")
 )
 
 # Memo modal
@@ -202,7 +215,9 @@ memo_modal = register_modal(
             html.B("Note:"),
             html.P("This is locked until the limitations of the Memo field are found through testing.")
         ])
-    ], id="memo_tt_modal")
+    ], 
+    centered=True,
+    id="memo_tt_modal")
 )
 
 # Device modal
@@ -214,7 +229,9 @@ device_rev_modal = register_modal(
             html.B("Note:"),
             html.P("This is locked to 'SL-2' for now.")
         ])
-    ], id="device_tt_modal")
+    ], 
+    centered=True,
+    id="device_tt_modal")
 )
 
 # Pattern modal
@@ -229,7 +246,9 @@ pattern_modal = register_modal(
             html.P("Any value other than 'USER' will disable all sliders, since the preset pattern will override any"
                 " pattern defined using the sliders.")
         ])
-    ], id="slicer_pattern_tt_modal")
+    ], 
+    centered=True,
+    id="slicer_pattern_tt_modal")
 )
 
 
@@ -246,7 +265,9 @@ generic_enable_modal = register_modal(
             #html.B("Note:"),
             #html.P("Disabling the channel will also disable the sliders for all parameter arrays in the channel.")
         ])
-    ], id="generic_enable_tt_modal")
+    ], 
+    centered=True,
+    id="generic_enable_tt_modal")
 )
 
 
@@ -263,7 +284,9 @@ slicer_enable_modal = register_modal(
             html.B("Note:"),
             html.P("Disabling the channel will also disable the sliders for all parameter arrays in the channel.")
         ])
-    ], id="slicer_enable_tt_modal")
+    ], 
+    centered=True,
+    id="slicer_enable_tt_modal")
 )
 
 # Effect Type Modal
@@ -279,7 +302,9 @@ effect_modal = register_modal(
             html.B("Note:"),
             html.P("The effect names may not be completely correct yet.")
         ])
-    ], id="slicer_effect_tt_modal")
+    ], 
+    centered=True,
+    id="slicer_effect_tt_modal")
 )
 
 # Step Number Modal
@@ -292,7 +317,9 @@ step_number_modal = register_modal(
             html.B("Note:"),
             html.P("Choosing a value < STEP_24 will disable some sliders to indicate that these values will be ignored.")
         ])
-    ], id="slicer_step_num_tt_modal")
+    ], 
+    centered=True,
+    id="slicer_step_num_tt_modal")
 )
 
 # Parameter Arrays Modal
@@ -322,7 +349,9 @@ param_array_modal = register_modal(
             html.P("Choosing a value other than 'PITCH' for Effect Type will disable these sliders, since they have"
                 " no effect for other Effect Type modes.")
         ])
-    ], id="slicer_param_arr_tt_modal")
+    ], 
+    centered=True,
+    id="slicer_param_arr_tt_modal")
 )
 
 
@@ -394,7 +423,9 @@ for i in range(9):
             html.P("BPM indicates the number of quarter-note beats per minute."),
             html.P("When external MIDI is connected, MASTER BPM may sync to the MIDI device, preventing manual setting unless SYNC CLOCK is set to INTERNAL."),
         ])
-    ], id=f"phaser_param_{i+1}_tt_modal") #phaser_param_1_tt_modal
+    ], 
+    centered=True,
+    id=f"phaser_param_{i+1}_tt_modal") #phaser_param_1_tt_modal
 )
 
 
@@ -463,7 +494,9 @@ for i in range(10):
             html.P("When external MIDI is connected, MASTER BPM may sync to the MIDI device, preventing manual setting unless SYNC CLOCK is set to INTERNAL."),
 
         ])
-    ], id=f"flanger_param_{i+1}_tt_modal") #flanger_param_1_tt_modal
+    ], 
+    centered=True,
+    id=f"flanger_param_{i+1}_tt_modal") #flanger_param_1_tt_modal
 )
 
 
@@ -503,7 +536,9 @@ for i in range(5):
             html.P("The presets that have Tremolo enabled are: 'TREMOLO 5-**', 'SFX 7-08', 'McR Chord Fun', 'McR Dark Knight', 'McR Organ', 'TREMOLO WAVE', 'RISE UP'"),
 
         ])
-    ], id=f"tremolo_param_{i+1}_tt_modal") #tremolo_param_1_tt_modal
+    ], 
+    centered=True,
+    id=f"tremolo_param_{i+1}_tt_modal") #tremolo_param_1_tt_modal
 )
 
 #########################
@@ -518,7 +553,9 @@ overtone_ll_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified. Parameters might be mismatched."),
             html.P("Adjusts the volume of the harmonic one octave below."),
         ])
-    ], id="overtone_param_1_tt_modal")
+    ], 
+    centered=True,
+    id="overtone_param_1_tt_modal")
 )
 
 overtone_hl_modal = register_modal(
@@ -528,7 +565,9 @@ overtone_hl_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified. Parameters might be mismatched."),
             html.P("Adjusts the volume of the harmonic one octave above."),
         ])
-    ], id="overtone_param_2_tt_modal")
+    ], 
+    centered=True,
+    id="overtone_param_2_tt_modal")
 )
 
 overtone_ul_modal = register_modal(
@@ -538,7 +577,9 @@ overtone_ul_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified. Parameters might be mismatched."),
             html.P("Adjusts the volume of added sound whose pitch is slightly shifted relative to the direct sound."),
         ])
-    ], id="overtone_param_3_tt_modal")
+    ], 
+    centered=True,
+    id="overtone_param_3_tt_modal")
 )
 
 overtone_dl_modal = register_modal(
@@ -548,7 +589,8 @@ overtone_dl_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified. Parameters might be mismatched."),
             html.P("Adjusts the volume of the direct sound."),
         ])
-    ], id="overtone_param_4_tt_modal")
+    ], centered=True,
+    id="overtone_param_4_tt_modal")
 )
 
 
@@ -559,7 +601,9 @@ overtone_detune_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified. Parameters might be mismatched."),
             html.P("Adjusts the amount of the detune effect that adds depth to the sound."),
         ])
-    ], id="overtone_param_5_tt_modal")
+    ], 
+    centered=True,
+    id="overtone_param_5_tt_modal")
 )
 
 
@@ -570,7 +614,9 @@ overtone_low_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified. Parameters might be mismatched."),
             html.P("Adjusts the tonal character of the low-frequency range."),
         ])
-    ], id="overtone_param_6_tt_modal")
+    ], 
+    centered=True,
+    id="overtone_param_6_tt_modal")
 )
 
 overtone_high_modal = register_modal(
@@ -580,7 +626,9 @@ overtone_high_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified. Parameters might be mismatched."),
             html.P("Adjusts the tonal character of the high-frequency range."),
         ])
-    ], id="overtone_param_7_tt_modal")
+    ], 
+    centered=True,
+    id="overtone_param_7_tt_modal")
 )
 
 overtone_mode_modal = register_modal(
@@ -590,7 +638,9 @@ overtone_mode_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified. Parameters might be mismatched."),
             html.P("Selects the type of output between MONO and STEREO."),
         ])
-    ], id="overtone_param_8_tt_modal")
+    ], 
+    centered=True,
+    id="overtone_param_8_tt_modal")
 )
 
 
@@ -607,7 +657,9 @@ beat_p1_modal = register_modal(
             html.P("Param 1 is always 0 in the presets. The effect of changing this parameter is unknown."),
             #html.P("It is potentially related to")
         ])
-    ], id="beat_param_1_tt_modal")
+    ], 
+    centered=True,
+    id="beat_param_1_tt_modal")
 )
 
 # Beat Param 2
@@ -618,7 +670,9 @@ beat_p2_modal = register_modal(
             html.P("Param 2 is always 1 in the presets (with one exception in TREMOLO_WAVE preset). The effect of changing this parameter is unknown."),
             #html.P("It is potentially related to ")
         ])
-    ], id="beat_param_2_tt_modal")
+    ], 
+    centered=True,
+    id="beat_param_2_tt_modal")
 )
 
 
@@ -633,7 +687,9 @@ compressor_sustain_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified."),
             html.P("Adjusts the range (time) over which lowlevel signals are boosted. Larger values will result in longer sustain."),
         ])
-    ], id="compressor_param_1_tt_modal")
+    ], 
+    centered=True,
+    id="compressor_param_1_tt_modal")
 )
 
 compressor_attack_modal = register_modal(
@@ -643,7 +699,9 @@ compressor_attack_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified."),
             html.P("Adjusts the strength of the attack when picking."),
         ])
-    ], id="compressor_param_2_tt_modal")
+    ], 
+    centered=True,
+    id="compressor_param_2_tt_modal")
 )
 
 compressor_level_modal = register_modal(
@@ -653,7 +711,9 @@ compressor_level_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified."),
             html.P("Adjusts the volume."),
         ])
-    ], id="compressor_param_3_tt_modal")
+    ], 
+    centered=True,
+    id="compressor_param_3_tt_modal")
 )
 
 compressor_tone_modal = register_modal(
@@ -663,7 +723,9 @@ compressor_tone_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified."),
             html.P("Adjusts the tone."),
         ])
-    ], id="compressor_param_4_tt_modal")
+    ], 
+    centered=True,
+    id="compressor_param_4_tt_modal")
 )
 
 compressor_ratio_modal = register_modal(
@@ -674,7 +736,9 @@ compressor_ratio_modal = register_modal(
             html.P("Selects the compression ratio."),
             html.P("In the presets, this takes values between 3 and 17."),
         ])
-    ], id="compressor_param_5_tt_modal")
+    ], 
+    centered=True,
+    id="compressor_param_5_tt_modal")
 )
 
 compressor_directmix_modal = register_modal(
@@ -685,7 +749,9 @@ compressor_directmix_modal = register_modal(
             html.P("Adjusts the volume of the direct sound."),
             html.P("In the presets, this is 0 everywhere except for 'McR Ready 4 Beat', 'McR Techno 1', and 'McR Techno 2', where it is 30."),
         ])
-    ], id="compressor_param_6_tt_modal")
+    ], 
+    centered=True,
+    id="compressor_param_6_tt_modal")
 )
 
 
@@ -701,7 +767,9 @@ divider_p1_modal = register_modal(
             html.P("Param 1 ranges between 0 and 3 in the presets. The effect of changing this parameter is unknown."),
             html.P("It is potentially related to how the input signal is split and recombined.")
         ])
-    ], id="divider_param_1_tt_modal")
+    ], 
+    centered=True,
+    id="divider_param_1_tt_modal")
 )
 
 # Divider Param 2
@@ -712,7 +780,9 @@ divider_p2_modal = register_modal(
             html.P("Param 2 is generally 9, but it ranges between 0 and 9 in the presets. The effect of changing this parameter is unknown."),
             html.P("It is potentially related to how the input signal is split and recombined.")
         ])
-    ], id="divider_param_2_tt_modal")
+    ], 
+    centered=True,
+    id="divider_param_2_tt_modal")
 )
 
 
@@ -731,7 +801,9 @@ mixer_bypass_modal = register_modal(
             html.P("It is unknown whether this switch also bypass the effects (Phaser, Tremolo, etc) for Channel 2"
                 " as well.")
         ])
-    ], id="mixer_ch2_bypass_tt_modal")
+    ], 
+    centered=True,
+    id="mixer_ch2_bypass_tt_modal")
 )
 
 # Mixer P1
@@ -753,7 +825,9 @@ for i in range(4):
                 html.B('SPREAD' ),
                 html.P('Slightly delays the sound of channel “B” to make the sound more spacious. This is shown only if DIVIDER MODE is set to “DUAL.”')
             ])
-        ], id=f"mixer_param_{i+1}_tt_modal")#mixer_param_1_tt_modal
+        ], 
+        centered=True,
+        id=f"mixer_param_{i+1}_tt_modal")#mixer_param_1_tt_modal
     )
 
 
@@ -771,7 +845,9 @@ ns_release_modal = register_modal(
             html.P("Adjusts the time from when the noise suppressor " \
             "begins to function until the noise level reaches 0."),
         ])
-    ], id="noise_suppressor_release_tt_modal")
+    ], 
+    centered=True,
+    id="noise_suppressor_release_tt_modal")
 )
 
 # Noise Suppressor Threshold
@@ -788,7 +864,9 @@ ns_threshold_modal = register_modal(
             html.P(" High settings for the threshold parameter may result "
             "in there being no sound when you play with your guitar volume turned down.")
         ])
-    ], id="noise_suppressor_threshold_tt_modal")
+    ], 
+    centered=True,
+    id="noise_suppressor_threshold_tt_modal")
 )
 
 
@@ -816,7 +894,9 @@ peq_hg_modal = register_modal(
             html.P("Adjusts the tone for the high frequency range."),
             html.P('0 represents -20dB; 20 represents +0dB; 40 represents +20dB.')
         ])
-    ], id="para_eq_param_2_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_2_tt_modal")
 )
 
 peq_lvl_modal = register_modal(
@@ -828,7 +908,9 @@ peq_lvl_modal = register_modal(
             html.P('0 represents -20dB; 20 represents +0dB; 40 represents +20dB.')
 
         ])
-    ], id="para_eq_param_3_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_3_tt_modal")
 )
 
 peq_lmf_modal = register_modal(
@@ -838,7 +920,9 @@ peq_lmf_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified."),
             html.P("Specifies the center of the frequency range that will be adjusted by the LOW-MID GAIN.")
         ])
-    ], id="para_eq_param_4_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_4_tt_modal")
 )
 
 peq_lmq_modal = register_modal(
@@ -848,7 +932,9 @@ peq_lmq_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified."),
             html.P("Adjusts the width of the area affected by the EQ centered at the LOW-MID FREQ. Higher values will narrow the area.")
         ])
-    ], id="para_eq_param_5_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_5_tt_modal")
 )
 
 peq_lmg_modal = register_modal(
@@ -859,7 +945,9 @@ peq_lmg_modal = register_modal(
             html.P("Adjusts the low-middle frequency range tone."),
             html.P('0 represents -20dB; 20 represents +0dB; 40 represents +20dB.')
         ])
-    ], id="para_eq_param_6_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_6_tt_modal")
 )
 
 peq_hmf_modal = register_modal(
@@ -869,7 +957,9 @@ peq_hmf_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified."),
             html.P("Specifies the center of the frequency range that will be adjusted by the HIGH-MID GAIN.")
         ])
-    ], id="para_eq_param_7_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_7_tt_modal")
 )
 
 peq_hmq_modal = register_modal(
@@ -879,7 +969,9 @@ peq_hmq_modal = register_modal(
             html.P("Description from GT-1000 Manual. To be verified."),
             html.P("Adjusts the width of the area affected by the EQ centered at the HIGH-MID FREQ. Higher values will narrow the area.")
         ])
-    ], id="para_eq_param_8_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_8_tt_modal")
 )
 
 peq_hmg_modal = register_modal(
@@ -891,7 +983,9 @@ peq_hmg_modal = register_modal(
             html.P('0 represents -20dB; 20 represents +0dB; 40 represents +20dB.')
 
         ])
-    ], id="para_eq_param_9_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_9_tt_modal")
 )
 
 peq_hc_modal = register_modal(
@@ -903,7 +997,9 @@ peq_hc_modal = register_modal(
             html.B('Note:'),
             html.P("When set to 0, the low cut filter will have no effect.")
         ])
-    ], id="para_eq_param_10_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_10_tt_modal")
 )
 
 
@@ -916,5 +1012,7 @@ peq_lc_modal = register_modal(
             html.B('Note:'),
             html.P("When set to 30, the high cut filter will have no effect.")
         ])
-    ], id="para_eq_param_11_tt_modal")
+    ], 
+    centered=True,
+    id="para_eq_param_11_tt_modal")
 )

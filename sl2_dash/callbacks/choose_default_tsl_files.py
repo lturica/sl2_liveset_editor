@@ -7,7 +7,7 @@ import importlib.resources as resources
 from typing import List
 
 
-# this file contains the code to choose and load default .tsl files from the 'res' package.
+# this file contains the code to choose and load default .tsl files from the 'res' directory.
 # A modal is used, with a dropdown populated with the available .tsl files.
 # the modal is triggered by clicking the "Choose Default" nav link in the header navbar.
 # Loading is done by clicking the "Load" button in the modal. The logic requests an 'upload' of the selected file.

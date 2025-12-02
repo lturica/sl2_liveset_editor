@@ -195,16 +195,14 @@ disclaimer_modal = register_modal(
                     ),
                     html.P(
                         [
-                            " The most recent update was lovingly made by u/_Drann. "
+                            "The most recent update was lovingly made by u/_Drann. "
                             "I am looking forward to feedback, ideas, and contributions. "
-                            "In particular, if you take the time to experiment with the parameters, let me know what you find. "
-                            "I have put together a rough Jupyter notebook with histograms of all the parameters in the pre-made .tsl files, "
-                            "and it can be found in the ",
+                            "In particular, if you take the time to experiment with the parameters, let me know what you find by opening an issue on the ",
                             html.A(
                                 "GitHub repo of this project",
                                 href="https://github.com/lturica/sl2_liveset_editor",
                             ),
-                            ".  ",
+                            ". There, you can also find a rough Jupyter notebook with histograms of all the parameters in the Default .tsl files.  ",
                         ]
                     ),
                     html.P(

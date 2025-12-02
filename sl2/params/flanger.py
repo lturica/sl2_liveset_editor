@@ -2,7 +2,6 @@ from .array import ParamArray
 
 
 class FlangerParamArray(ParamArray):
-    
     _enable = 0
     _param_1 = 1
     _param_2 = 2
@@ -14,7 +13,7 @@ class FlangerParamArray(ParamArray):
     _param_8 = 8
     _param_9 = 9
     _param_10 = 10
-    
+
     @property
     def enable(self):
         return self[self._enable]
@@ -22,11 +21,11 @@ class FlangerParamArray(ParamArray):
     @enable.setter
     def enable(self, v):
         self[self._enable] = v
-    
+
     @property
     def param_1(self):
         return self[self._param_1]
-    
+
     @param_1.setter
     def param_1(self, v):
         self[self._param_1] = v

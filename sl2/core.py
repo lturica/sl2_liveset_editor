@@ -1,6 +1,6 @@
 import json
 import numpy as np
-from importlib.resources import is_resource,read_text
+from importlib.resources import is_resource, read_text
 from typing import List
 from dataclasses import dataclass
 from typing import Optional, Union
@@ -9,8 +9,8 @@ from .consts import *
 from . import defaults
 import copy
 
-class ParamSet(object):
 
+class ParamSet(object):
     _DEFAULTS = "param_set.json"
 
     def __init__(self, **kwargs):
@@ -18,7 +18,7 @@ class ParamSet(object):
         self._storage = ParamSet._load_defaults()
         # Make everything a generic ParamArray for now, we will create more specific views using subclasses
         # of ParamArray below.
-        np_kwargs = {k:ParamArray(v) for k,v in kwargs.items()}
+        np_kwargs = {k: ParamArray(v) for k, v in kwargs.items()}
         self._storage.update(np_kwargs)
         # Get views of specific values we are interested in.
         self._com = self._storage["PATCH%COM"].view(ComParamArray)
@@ -42,12 +42,14 @@ class ParamSet(object):
     @staticmethod
     def _load_defaults():
         if not is_resource(defaults, ParamSet._DEFAULTS):
-            raise RuntimeError(f"Can't find default file {ParamSet._DEFAULTS} in resources!")
+            raise RuntimeError(
+                f"Can't find default file {ParamSet._DEFAULTS} in resources!"
+            )
 
         rfile = read_text(defaults, ParamSet._DEFAULTS)
         json_defaults = json.loads(rfile)
 
-        return {k:ParamArray(v) for k,v in json_defaults.items()}
+        return {k: ParamArray(v) for k, v in json_defaults.items()}
 
     @property
     def com(self):
@@ -58,7 +60,7 @@ class ParamSet(object):
         return self._slicer_1
 
     @slicer_1.setter
-    def slicer_1(self,v):
+    def slicer_1(self, v):
         self._slicer_1[:] = v
 
     @property
@@ -66,15 +68,15 @@ class ParamSet(object):
         return self._slicer_2
 
     @slicer_2.setter
-    def slicer_2(self,v):
+    def slicer_2(self, v):
         self._slicer_2[:] = v
-    
+
     @property
     def comp(self):
         return self._comp
-    
+
     @comp.setter
-    def comp(self,v):
+    def comp(self, v):
         self._comp[:] = v
 
     @property
@@ -82,15 +84,15 @@ class ParamSet(object):
         return self._divider
 
     @divider.setter
-    def divider(self,v):
+    def divider(self, v):
         self._divider[:] = v
 
     @property
     def phaser_1(self):
         return self._phaser_1
-    
+
     @phaser_1.setter
-    def phaser_1(self,v):
+    def phaser_1(self, v):
         self._phaser_1[:] = v
 
     @property
@@ -116,7 +118,7 @@ class ParamSet(object):
     @flanger_2.setter
     def flanger_2(self, v):
         self._flanger_2[:] = v
-        
+
     @property
     def tremolo_1(self):
         return self._tremolo_1
@@ -132,7 +134,7 @@ class ParamSet(object):
     @tremolo_2.setter
     def tremolo_2(self, v):
         self._tremolo_2[:] = v
-        
+
     @property
     def overtone_1(self):
         return self._overtone_1
@@ -154,7 +156,7 @@ class ParamSet(object):
         return self._mixer
 
     @mixer.setter
-    def mixer(self,v):
+    def mixer(self, v):
         self._mixer[:] = v
 
     @property
@@ -162,7 +164,7 @@ class ParamSet(object):
         return self._ns
 
     @ns.setter
-    def ns(self,v):
+    def ns(self, v):
         self._ns[:] = v
 
     @property
@@ -170,7 +172,7 @@ class ParamSet(object):
         return self._peq
 
     @peq.setter
-    def peq(self,v):
+    def peq(self, v):
         self._peq[:] = v
 
     @property
@@ -178,11 +180,12 @@ class ParamSet(object):
         return self._beat
 
     @beat.setter
-    def beat(self,v):
+    def beat(self, v):
         self._beat[:] = v
 
     def dict(self) -> dict:
-        return {k:v.json() for k,v in self._storage.items()}
+        return {k: v.json() for k, v in self._storage.items()}
+
 
 class Memo:
     def __init__(self, memo: str = "", isToneCentralPatch: bool = True):
@@ -191,6 +194,7 @@ class Memo:
 
     def dict(self):
         return self.__dict__
+
 
 class Patch:
     def __init__(self, paramSet: ParamSet, memo: Optional[Union[Memo, str]] = None):
@@ -204,11 +208,10 @@ class Patch:
         self.paramSet: ParamSet = paramSet
 
     def dict(self):
-        return {"memo":self.memo.dict(),
-                "paramSet":self.paramSet.dict()}
+        return {"memo": self.memo.dict(), "paramSet": self.paramSet.dict()}
+
 
 class LiveSet(object):
-
     def __init__(self, name: str, formatRev: str, device: str, data: List[List[Patch]]):
         self._name: str = name
         self._formatRev: str = formatRev
@@ -226,23 +229,23 @@ class LiveSet(object):
     @property
     def formatRev(self):
         return self._formatRev
-    
+
     @formatRev.setter
-    def formatRev(self,v):
+    def formatRev(self, v):
         self._formatRev = v
 
     @property
     def device(self):
         return self._device
-    
+
     @device.setter
-    def device(self,v):
-        self._device=v
+    def device(self, v):
+        self._device = v
 
     @property
     def data(self):
         return self._data
-    
+
     @property
     def patchNames(self):
         return [patch.paramSet.com.string for patch in self.data[0]]
@@ -251,17 +254,22 @@ class LiveSet(object):
         return json.dumps(self, default=lambda x: x.dict())
 
     def dict(self):
-        json_rep = {"name":self.name,
-                    "formatRev":self.formatRev,
-                    "device":self.device,
-                    "data":[[data.dict() for data in self.data[0]]]}
+        json_rep = {
+            "name": self.name,
+            "formatRev": self.formatRev,
+            "device": self.device,
+            "data": [[data.dict() for data in self.data[0]]],
+        }
         return json_rep
 
 
-_KEY_TO_CLASS = {PARAM_SET_KEYS: ParamSet,
-                 PATCH_KEYS: Patch,
-                 MEMO_KEYS: Memo,
-                 LIVE_SET_KEYS: LiveSet}
+_KEY_TO_CLASS = {
+    PARAM_SET_KEYS: ParamSet,
+    PATCH_KEYS: Patch,
+    MEMO_KEYS: Memo,
+    LIVE_SET_KEYS: LiveSet,
+}
+
 
 def _object_hook_dispatch(obj):
     """Accepts a dictionary and calls the correct class based on keys."""
@@ -273,9 +281,10 @@ def _object_hook_dispatch(obj):
 
     raise RuntimeError(f"Unable to find a matching class for parsed dictionary '{obj}'")
 
+
 def read_tsl(file_or_name):
     if type(file_or_name) is str:
-        file_obj = open(file_or_name,"r")
+        file_obj = open(file_or_name, "r")
     else:
         file_obj = file_or_name
 

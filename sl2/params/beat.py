@@ -20,4 +20,3 @@ class BeatParamArray(ParamArray):
     @param_2.setter
     def param_2(self, v):
         self[self._param_2] = v
-

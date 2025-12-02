@@ -4,21 +4,23 @@ import numpy as np
 from enum import IntEnum
 from ..params import ParamArray
 from .. import defaults
-from typing import Optional,List,Union
+from typing import Optional, List, Union
 from functools import cached_property
 import importlib.resources as pkg_resources
 
 
-PATTERN = enum.IntEnum("PATTERN", {f"PRESET_{i}":i for i in range(50)} | {"USER": 50})
+PATTERN = enum.IntEnum("PATTERN", {f"PRESET_{i}": i for i in range(50)} | {"USER": 50})
+
 
 class FX_TYPE(IntEnum):
     OFF = 0
     PITCH = 1
-    FLANGER = 2 # ?
-    PHASER = 3 # SWEEP ?
-    SWEEP = 4 # PHASER ?
+    FLANGER = 2  # ?
+    PHASER = 3  # SWEEP ?
+    SWEEP = 4  # PHASER ?
     FILTER = 5
     RING = 6
+
 
 class STEP_NUMBER(IntEnum):
     STEP_8 = 0
@@ -26,8 +28,8 @@ class STEP_NUMBER(IntEnum):
     STEP_16 = 2
     STEP_24 = 3
 
-class SlicerParamArray(ParamArray):
 
+class SlicerParamArray(ParamArray):
     _pattern = 0
     _enable = 1
     _fx_type = 2
@@ -114,7 +116,7 @@ class SlicerParamArray(ParamArray):
         return self[self._band]
 
     @band.setter
-    def band(self,v):
+    def band(self, v):
         self[self._band] = v
 
     @property
@@ -122,7 +124,7 @@ class SlicerParamArray(ParamArray):
         return self[self._effect]
 
     @effect.setter
-    def effect(self,v):
+    def effect(self, v):
         self[self._effect] = v
 
     @property
@@ -130,5 +132,5 @@ class SlicerParamArray(ParamArray):
         return self[self._pitch]
 
     @pitch.setter
-    def pitch(self,v):
+    def pitch(self, v):
         self[self._pitch] = v

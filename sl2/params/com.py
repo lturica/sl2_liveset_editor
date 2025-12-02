@@ -1,7 +1,7 @@
 from .array import ParamArray
 
-class ComParamArray(ParamArray):
 
+class ComParamArray(ParamArray):
     # Max length for PATCH%COM is 16.
     _LENGTH = 16
 
@@ -17,6 +17,6 @@ class ComParamArray(ParamArray):
         if not v.isascii():
             return
         # Cut down to 16 characters, then pad with spaces up to 16 characters.
-        tmp_s = v[:self._LENGTH].ljust(self._LENGTH)
-        #tmp_s = v[:self._LENGTH].upper().ljust(self._LENGTH) # removed necessity for uppercase
-        self[:self._LENGTH] = [ord(s) for s in tmp_s]
+        tmp_s = v[: self._LENGTH].ljust(self._LENGTH)
+        # tmp_s = v[:self._LENGTH].upper().ljust(self._LENGTH) # removed necessity for uppercase
+        self[: self._LENGTH] = [ord(s) for s in tmp_s]

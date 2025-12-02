@@ -1,6 +1,7 @@
 from .array import ParamArray
 from enum import IntEnum
 
+
 class PARAM_1(IntEnum):
     VALUE_0 = 0
     VALUE_1 = 1
@@ -13,6 +14,7 @@ class PARAM_1(IntEnum):
     VALUE_8 = 8
     VALUE_9 = 9
 
+
 class PARAM_2(IntEnum):
     VALUE_0 = 0
     VALUE_1 = 1
@@ -24,6 +26,7 @@ class PARAM_2(IntEnum):
     VALUE_7 = 7
     VALUE_8 = 8
     VALUE_9 = 9
+
 
 class DividerParamArray(ParamArray):
     _param_1 = 0

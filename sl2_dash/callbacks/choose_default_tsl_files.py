@@ -1,7 +1,6 @@
-
 import io
 import dash
-from dash import  Input, Output, no_update
+from dash import Input, Output, no_update
 from sl2_dash.components.ids import Nav
 import importlib.resources as resources
 from typing import List
@@ -19,18 +18,23 @@ def list_tsl_files() -> List[str]:
     Uses importlib.resources (py3.9+) and falls back to filesystem if needed.
     """
     try:
-        pkg_root = resources.files('res')
-        return [p.name for p in pkg_root.iterdir() if p.is_file() and p.suffix.lower() == '.tsl']
+        pkg_root = resources.files("res")
+        return [
+            p.name
+            for p in pkg_root.iterdir()
+            if p.is_file() and p.suffix.lower() == ".tsl"
+        ]
     except Exception as e:
         raise RuntimeError("Failed to list .tsl files from 'res' package") from e
-    
+
+
 def read_tsl_file(filename: str) -> bytes:
     """
     Read the contents of a .tsl file from the 'res' package.
     Returns the file contents as bytes.
     """
-    with resources.as_file(resources.files('res') / filename) as file_path:
-        with open(file_path, 'r', encoding='utf-8') as f:
+    with resources.as_file(resources.files("res") / filename) as file_path:
+        with open(file_path, "r", encoding="utf-8") as f:
             return io.StringIO(f.read())
 
 
@@ -41,11 +45,11 @@ def register_choose_default_callbacks(app: dash.Dash) -> None:
         Output("choose-default-modal", "is_open"),
         Output(Nav.DEFAULT_DROPDOWN, "options"),
         Output(Nav.DEFAULT_DROPDOWN, "value"),
-        Input(Nav.DEFAULT_CHOICE, "n_clicks"), # navbar clicked
-        Input(Nav.LOAD_DEFAULT_BUTTON, "n_clicks"), # load default button clicked
+        Input(Nav.DEFAULT_CHOICE, "n_clicks"),  # navbar clicked
+        Input(Nav.LOAD_DEFAULT_BUTTON, "n_clicks"),  # load default button clicked
         prevent_initial_call=True,
     )
-    def open_handle_modal(open_click,load_click):
+    def open_handle_modal(open_click, load_click):
         ctx = dash.callback_context
         if ctx.triggered_id is None:
             return no_update
@@ -57,4 +61,3 @@ def register_choose_default_callbacks(app: dash.Dash) -> None:
             files = list_tsl_files()
             options = [{"label": f, "value": f} for f in files]
             return True, options, files[0]
-    
